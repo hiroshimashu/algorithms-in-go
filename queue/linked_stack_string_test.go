@@ -67,4 +67,40 @@ func TestPush(t *testing.T) {
 		}
 	}
 
-} 
+}
+
+func TestPop(t *testing.T) {
+	cases := []struct {
+		name string 
+		givenQueue *LinkedStackOfString
+		expected *LinkedStackOfString
+	} {
+		{
+			"Successfully pop element when queue has enough elements",
+			&LinkedStackOfString{
+				first: &Node{
+					item: "s",
+					next: &Node{
+						item: "v",
+						next: nil,
+					},
+				},
+			},
+			&LinkedStackOfString{
+				first: &Node{
+					item: "v",
+					next: nil,
+				},
+			},
+		},
+	}
+
+	for _, tc := range cases {
+		tc.givenQueue.Pop()
+
+
+		if !reflect.DeepEqual(tc.givenQueue, tc.expected) {
+			t.Errorf("%s expected %v but got %v", tc.name, tc.expected, tc.givenQueue)
+		}
+	}
+}
