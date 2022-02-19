@@ -16,10 +16,19 @@ func New(n int) *QuickUnion {
 	return qu
 }
 
-func (qu *QuickUnion) Find(p, q int) bool {
-	return false
+func (qu *QuickUnion) Root(i int) int {
+	for (i != qu.ids[i]) {
+		i = qu.ids[i]
+	}
+	return i 
+}
+
+func (qu *QuickUnion)Connected(p, q int) bool {
+	return qu.Root(p) == qu.Root(q)
 }
 
 func (qu *QuickUnion) Union(p, q int) {
-
+	i := qu.Root(p)
+	j := qu.Root(q)
+	qu.ids[i] = j
 }
